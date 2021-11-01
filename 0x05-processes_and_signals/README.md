@@ -1,0 +1,1 @@
+At the end of this project, I'll be able to understand processes and signals.
