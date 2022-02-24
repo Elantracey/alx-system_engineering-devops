@@ -6,12 +6,15 @@ do
     case $counter in
 	4) echo $counter
 	   echo bad luck from China
+	   ((counter++))
 	   ;;
 	9) echo $counter
 	   echo bad luck from Japan
+	   ((counter++))
 	   ;;
 	17) echo $counter
 	    echo bad luck from Italy
+	    ((counter++))
 	    ;;
     esac
     echo $counter
