@@ -34,19 +34,14 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
-frontend http
-	 bind *:80
-	 mode  http
-	 default_backend web-backend
 
-backend web-backend
-	redirect scheme https if !{ ssl_fc }
-	balance roundrobin
-	server 837-web-01 35.237.80.55:80 check
-	server 837-web-01 35.231.185.233:80 check
+frontend haproxy-main
+        bind *:80
+	option forwardfor
+	default_backend apache_webservers
 
-frontend www-https
-	 bind *: 443 ssl crt /etc/haproxy/ssl/www.karenherrera.tech.pem
-	 reqadd X-Forwarded-Proto:\ https
-	 default_backend web-backend
-	 
+backend apache_webservers
+        balance roundrobin
+	server 1239-web-01 34.73.109.127:80 check
+	server 1239-web-02 34.236.216.30:80 check
+	option httpchk
